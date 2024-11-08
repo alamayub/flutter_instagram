@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
 }
 
 /*
- 
 Alias name: androiddebugkey
 Creation date: 1 Nov 2024
 Entry type: PrivateKeyEntry
