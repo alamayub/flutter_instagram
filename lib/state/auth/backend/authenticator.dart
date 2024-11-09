@@ -7,18 +7,22 @@ import 'package:instagram/state/auth/models/auth_result.dart';
 import 'package:instagram/state/posts/typedefs/user_id.dart';
 
 class Authenticator {
+  const Authenticator();
   UserId? get userId => FirebaseAuth.instance.currentUser?.uid;
   bool get isAlreadyLoggedIn => userId != null; 
   String? get displayName => FirebaseAuth.instance.currentUser?.displayName;
   String? get email =>  FirebaseAuth.instance.currentUser?.email;
 
+  // logout
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn().signOut();
       await FacebookAuth.instance.logOut();
+    }  on FirebaseAuthException catch(e) {
+      debugPrint('LOGOUT ERROR WHILE : ${e.toString()}');
     } catch (e) {
-      debugPrint('ERROR WHILE LOGOUT : ${e.toString()}');
+      debugPrint('LOGOUT ERROR : ${e.toString()}');
     }
   }
 
