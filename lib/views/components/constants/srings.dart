@@ -16,7 +16,7 @@ class Strings {
   static const people = 'people';
   static const likedThis = 'liked this';
   static const delete = 'Delete';
-  static const deleteDescription = 'Are you sure that you want to delete this?';
+  static const deleteDescription = 'Are you sure that you want to delete ';
   static const logout = 'Logout';
   static const logoutDescription =
       'Are you sure that you want to logout of the app?';

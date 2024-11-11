@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:instagram/state/providers/is_loading_provider.dart';
+import 'package:instagram/views/components/loading/loading_screen.dart';
 
 import 'firebase_options.dart';
 import 'root_screen.dart';
@@ -24,7 +27,22 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RootScreen(),
+      home: Consumer(
+        builder: (_, ref, child) {
+          // for universal loading
+          ref.listen<bool>(
+            isLoadingProvider,
+            (_, isLoading) {
+              if (isLoading) {
+                LoadingScreen.instance().show(context: context);
+              } else {
+                LoadingScreen.instance().hide();
+              }
+            },
+          );
+          return const RootScreen();
+        },
+      ),
     );
   }
 }
